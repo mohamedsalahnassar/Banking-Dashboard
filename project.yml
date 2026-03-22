@@ -17,4 +17,4 @@ targets:
       - package: DiamondRevamp
 packages:
   DiamondRevamp:
-    path: .
+    path: Packages/DiamondRevamp

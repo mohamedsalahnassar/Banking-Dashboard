@@ -10,10 +10,6 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
-        .executable(
-            name: "DiamondRevampDemo",
-            targets: ["DiamondRevampDemo"]
-        ),
         .library(
             name: "DiamondRevamp",
             targets: ["DiamondRevamp"]),
@@ -29,10 +25,6 @@ let package = Package(
                 "ScrollAnimationKit",
                 .product(name: "LiquidGlassKit", package: "LiquidGlassKit")
             ]
-        ),
-        .executableTarget(
-            name: "DiamondRevampDemo",
-            dependencies: ["DiamondRevamp"]
         )
     ]
 )

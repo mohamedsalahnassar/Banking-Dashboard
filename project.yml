@@ -1,0 +1,16 @@
+name: Banking-Dashboard
+options:
+  bundleIdPrefix: com.mohamedsalahnassar
+  deploymentTarget:
+    iOS: 16.0
+targets:
+  Banking-Dashboard-App:
+    type: application
+    platform: iOS
+    sources:
+      - AppSources
+    dependencies:
+      - package: DiamondRevamp
+packages:
+  DiamondRevamp:
+    path: .

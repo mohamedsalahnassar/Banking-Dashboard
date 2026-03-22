@@ -4,11 +4,13 @@ import LiquidGlassKit
 
 struct DashboardHomeView: View {
     @EnvironmentObject var privacyManager: PrivacyManager
+    @StateObject private var configurator = AnimationConfigurator()
+    @State private var showConfigurator = false
     
     var body: some View {
         NavigationStack {
             ScrollEffectView(
-                style: .parallax,
+                style: .custom(configurator.config),
                 heroTopPadding: 30,
                 stickyHeaderConfig: StickyHeaderConfiguration(
                     revealThreshold: 120,
@@ -39,13 +41,16 @@ struct DashboardHomeView: View {
                 
                 // Trailing: Action Buttons
                 ToolbarItemGroup(placement: .automatic) {
-                    DashboardActionButtons()
+                    DashboardActionButtons(showConfigurator: $showConfigurator)
                 }
             }
             // Make Navigation Bar Transparent
             #if os(iOS)
             .toolbarBackground(.hidden, for: .navigationBar)
             #endif
+            .sheet(isPresented: $showConfigurator) {
+                DashboardConfiguratorView(configurator: configurator)
+            }
         }
     }
 }
@@ -119,6 +124,7 @@ struct DashboardSearchPill: View {
 
 struct DashboardActionButtons: View {
     @EnvironmentObject var privacyManager: PrivacyManager
+    @Binding var showConfigurator: Bool
 
     var body: some View {
         GlassToolbarButton(icon: "bell.fill", hasBadge: true)
@@ -130,6 +136,12 @@ struct DashboardActionButtons: View {
             }
         }) {
             GlassToolbarIcon(icon: privacyManager.isMasked ? "eye" : "eye.slash", hasBadge: false)
+        }
+        
+        Button(action: {
+            showConfigurator = true
+        }) {
+            GlassToolbarIcon(icon: "slider.horizontal.3", hasBadge: false)
         }
         
         GlassToolbarButton(icon: "gearshape", hasBadge: false)

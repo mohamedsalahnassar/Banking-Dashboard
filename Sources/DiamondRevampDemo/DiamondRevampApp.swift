@@ -1,4 +1,5 @@
 import SwiftUI
+import DiamondRevamp
 
 @main
 struct DiamondRevampApp: App {
